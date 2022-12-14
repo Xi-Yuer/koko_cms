@@ -6,6 +6,7 @@ import { useUIStore } from '@/store/ui'
 import { storeToRefs } from 'pinia'
 
 const router = useRouter()
+const { isCollapse } = storeToRefs(useUIStore())
 
 const handleOpen = (key: string, keyPath: string[]) => {
   router.push(key)
@@ -15,12 +16,10 @@ const handleClose = () => {}
 // 获取当前路由的 path
 const route = useRoute()
 const path = computed(() => route.path)
-
-const { isCollapse } = storeToRefs(useUIStore())
 </script>
 
 <template>
-  <div class="h-screen menu">
+  <div class="h-screen menu" :style="{ width: !isCollapse ? '210px' : '60px' }">
     <div class="font-bold text-lg py-3 flex items-center">
       <img
         src="@/assets/img/turple.png"

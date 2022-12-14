@@ -68,13 +68,13 @@ class Request {
         })
     })
   }
-  get(config: requestConfig, data: any): any {
+  get(config: requestConfig, data?: any): any {
     return this.request({ ...config, data, method: 'GET' })
   }
-  post(config: requestConfig, data: any): any {
+  post(config: requestConfig, data?: any): any {
     return this.request({ ...config, data, method: 'POST' })
   }
-  delete(config: requestConfig, data: any): any {
+  delete(config: requestConfig, data?: any): any {
     return this.request({ ...config, data, method: 'DELETE' })
   }
 }

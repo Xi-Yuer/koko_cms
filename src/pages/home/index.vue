@@ -22,7 +22,7 @@ const { isCollapse } = storeToRefs(useUIStore())
 
 <style scoped lang="less">
 .main {
-  @apply w-screen h-screen flex;
+  @apply w-screen h-screen flex overflow-hidden;
   .right {
     flex: 1;
   }

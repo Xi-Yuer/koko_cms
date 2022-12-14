@@ -39,7 +39,7 @@ const login = () => {
         <div class="switch__circle_bot"></div>
         <div class="flex justify-around items-center info">
           <h1 class="title">欢迎回来</h1>
-          <span class="subtitle">龙三生态甲鱼后台管理系统</span>
+          <span class="subtitle">龙山生态甲鱼后台管理系统</span>
         </div>
       </div>
       <div class="flex justify-around items-center right">

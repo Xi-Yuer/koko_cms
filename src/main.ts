@@ -6,6 +6,7 @@ import router from '@/router/index'
 
 import 'normalize-css'
 import 'virtual:windi.css'
+import '@/assets/style/index.less'
 import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 

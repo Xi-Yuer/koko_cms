@@ -1,0 +1,27 @@
+* {
+  scrollbar-color: #e5e5e5 #f7f7f9; // 滑块颜色  滚动条背景颜色
+  scrollbar-width: thin; // 滚动条宽度有三种：thin、auto、none
+}
+::-webkit-scrollbar {
+  background: #f7f7f9; // 背景颜色
+  width: 10px; // 纵向滑块宽度
+  height: 10px; // 横向滑块宽度
+}
+::-webkit-scrollbar-track-piece {
+  // 滚动条背景颜色
+  background: #f7f7f9;
+}
+::-webkit-scrollbar-thumb {
+  // 滑块设置
+  border-radius: 10px;
+  background: #e5e5e5;
+}
+// 也可以单独设置横向滚动条和纵向滚动条的背景颜色
+::-webkit-scrollbar-thumb:vertical {
+  // 纵向滑块
+  background: #e5e5e5;
+}
+::-webkit-scrollbar-thumb:horizontal {
+  // 横向滑块
+  background: #e5e5e5;
+}
