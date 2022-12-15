@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import Breadcrumb from '@/components/breadcrumb.vue'
+import { Action, ElMessage, ElMessageBox } from 'element-plus'
 import { useUIStore } from '@/store/ui'
 import { useUserStore } from '@/store/user'
+import local from '@/utils/local'
 import { storeToRefs } from 'pinia'
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 
 const { isCollapse } = storeToRefs(useUIStore())
 const { changeCollapse } = useUIStore()
 const { userInfo } = storeToRefs(useUserStore())
+const router = useRouter()
 
 const changeFold = () => changeCollapse()
 
@@ -15,6 +19,23 @@ const isFold = computed({
   get: () => (isCollapse.value ? 'Fold' : 'Expand'),
   set: () => ({}),
 })
+
+type ICommand = 'update' | 'logout'
+
+const handleCommand = (command: ICommand) => {
+  if (command == 'logout') {
+    ElMessageBox.confirm('确定要退出登录么', '退出', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }).then(() => {
+      local.clear()
+      router.push('/login')
+    })
+  } else {
+    router.push('/profile')
+  }
+}
 </script>
 
 <template>
@@ -30,8 +51,21 @@ const isFold = computed({
     <div
       class="absolute right-[30px] flex items-center justify-center cursor-pointer"
     >
-      <span class="mx-4 text-dark-50">{{ userInfo.name }}</span>
-      <el-avatar :src="userInfo.avatar" />
+      <el-dropdown @command="handleCommand">
+        <div class="flex justify-center items-center">
+          <span class="text-dark-50 font-bold">{{ userInfo.name }}</span>
+          <span class="mr-4 text-gray-400 text-sm">
+            ({{ userInfo.phone_number }})
+          </span>
+          <el-avatar :src="userInfo.avatar" />
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <el-dropdown-item command="update">修改资料</el-dropdown-item>
+            <el-dropdown-item command="logout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
   </div>
 </template>

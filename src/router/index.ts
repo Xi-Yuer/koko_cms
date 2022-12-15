@@ -39,6 +39,14 @@ const routes: Readonly<RouteRecordRaw[]> = [
         },
       },
       {
+        path: '/profile',
+        component: () => import('@/pages/profile/index.vue'),
+        meta: {
+          path: '/profile',
+          name: '我的资料',
+        },
+      },
+      {
         path: '/:pathMatch(.*)*',
         component: () => import('@/pages/404/index.vue'),
         meta: {

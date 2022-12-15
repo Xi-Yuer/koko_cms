@@ -85,7 +85,7 @@ const updateBannerTitle = (row: IRow) => {
         </div>
       </template>
       <template v-if="bannerList?.length">
-        <el-carousel :interval="1500" type="card">
+        <el-carousel :interval="3000" type="card">
           <el-carousel-item v-for="item in bannerList" :key="item.id">
             <img
               :src="item.imgUrl"
@@ -163,6 +163,7 @@ const updateBannerTitle = (row: IRow) => {
       title="新建"
       width="30%"
       destroy-on-close
+      :close-on-click-modal="false"
     >
       <div class="w-full h-full flex justify-center items-center">
         <Upload url="/banners/upload" name="banner" ref="uploadRef" />
@@ -180,6 +181,7 @@ const updateBannerTitle = (row: IRow) => {
       title="修改标题"
       width="30%"
       destroy-on-close
+      :close-on-click-modal="false"
     >
       <div class="w-full h-full flex justify-center items-center">
         <el-input v-model="edit.title" placeholder="请输入标题" />

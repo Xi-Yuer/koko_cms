@@ -1,16 +1,10 @@
-interface IAccount {
-  phone: string
-  password: string
-}
 class Local {
   set(key: string, value: any) {
-    const result = JSON.stringify(value)
-    window.localStorage.setItem(key, result)
+    window.localStorage.setItem(key, JSON.stringify(value))
   }
-  get(key: string): IAccount {
-    const value = window.localStorage.getItem(key) || ''
-    const result = JSON.parse(value)
-    return result
+  get(key: string) {
+    const value = window.localStorage.getItem(key)
+    if (value) return JSON.parse(value)
   }
   remove(key: string) {
     window.localStorage.removeItem(key)

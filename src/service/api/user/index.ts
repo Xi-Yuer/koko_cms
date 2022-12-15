@@ -1,11 +1,16 @@
 import { request } from '@/service'
+import { IUserInfo } from '@/store/user'
 import md5 from 'md5'
 
-interface ILoginInfoType {
+interface IResponseData {
   message: string
   status: number
-  token: string
   data: any
+}
+
+interface ILoginInfoType extends IResponseData {
+  token: string
+  data: IUserInfo
 }
 
 // 用户登录
@@ -17,4 +22,8 @@ export function Login(payload: {
     { showLoading: true, url: '/user/login' },
     { phone: payload.phone, password: md5(payload.password) }
   )
+}
+
+export const getAllUser = (): Promise<IResponseData> => {
+  return request.get({ url: '/user/getAllUsers' })
 }

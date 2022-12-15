@@ -4,14 +4,27 @@ import { ref } from 'vue'
 import { Login } from '@/service/api/user/index'
 import Local from '@/utils/local'
 
+export interface IUserInfo {
+  adress: string | null
+  asign: string | null
+  avatar: string | null
+  birthday: string | null
+  gender: number | null
+  id: number | null
+  is_admin: number | null
+  is_vip: number | null
+  name: string | null
+  password: string | null
+  phone_number: string | null
+}
+
 interface IUserStore {
   token: string
-  userInfo: Function
+  userInfo: IUserInfo
   userLogin: Function
 }
 
-export const useUserStore = defineStore('user', (): IUserStore => {
-  
+export const useUserStore = defineStore('User', (): IUserStore => {
   const token = ref<any>(Local.get('TOKEN_KEY'))
   const userInfo = ref<any>(Local.get('USER_INFO'))
 

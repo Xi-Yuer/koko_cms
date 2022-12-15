@@ -12,8 +12,8 @@ interface IAccount {
 
 const localAccount: IAccount = local.get('ACCOUNT')
 const account = reactive({
-  phone: (await localAccount).phone || '',
-  password: (await localAccount).password || '',
+  phone: localAccount?.phone || '',
+  password: localAccount?.password || '',
 })
 
 const remenberPassword = ref(account.phone ? true : false)
