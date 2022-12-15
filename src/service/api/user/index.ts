@@ -5,6 +5,7 @@ interface ILoginInfoType {
   message: string
   status: number
   token: string
+  data: any
 }
 
 // 用户登录

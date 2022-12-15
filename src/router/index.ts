@@ -1,5 +1,5 @@
+import { useUIStore } from '@/store/ui'
 import { useUserStore } from '@/store/user'
-import { ElMessage } from 'element-plus'
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: Readonly<RouteRecordRaw[]> = [
   {
@@ -9,22 +9,42 @@ const routes: Readonly<RouteRecordRaw[]> = [
       {
         path: '/banner',
         component: () => import('@/pages/banner/index.vue'),
+        meta: {
+          path: '/banner',
+          name: '轮播图',
+        },
       },
       {
         path: '/user',
         component: () => import('@/pages/user/index.vue'),
+        meta: {
+          path: '/user',
+          name: '用户管理',
+        },
       },
       {
         path: '/order',
         component: () => import('@/pages/order/index.vue'),
+        meta: {
+          path: '/order',
+          name: '订单管理',
+        },
       },
       {
         path: '/product',
         component: () => import('@/pages/product/index.vue'),
+        meta: {
+          path: '/product',
+          name: '商品管理',
+        },
       },
       {
         path: '/:pathMatch(.*)*',
         component: () => import('@/pages/404/index.vue'),
+        meta: {
+          path: '/:pathMatch(.*)*',
+          name: '404',
+        },
       },
     ],
   },
@@ -45,6 +65,8 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const { token } = useUserStore()
+  const { addRoute } = useUIStore()
+  addRoute(to.meta)
   if (to.path == '/') {
     next('/banner')
   } else {

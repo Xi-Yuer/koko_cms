@@ -5,9 +5,15 @@ import { useUserStore } from '@/store/user'
 import { useRouter } from 'vue-router'
 import local from '@/utils/local'
 
+interface IAccount {
+  phone: string
+  password: string
+}
+
+const localAccount: Promise<IAccount> = local.get('ACCOUNT')
 const account = reactive({
-  phone: local.get('ACCOUNT').phone || '',
-  password: local.get('ACCOUNT').password || '',
+  phone: (await localAccount).phone || '',
+  password: (await localAccount).password || '',
 })
 
 const remenberPassword = ref(account.phone ? true : false)

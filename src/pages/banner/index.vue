@@ -85,7 +85,7 @@ const updateBannerTitle = (row: IRow) => {
         </div>
       </template>
       <template v-if="bannerList?.length">
-        <el-carousel :interval="1500" type="card" height="300px">
+        <el-carousel :interval="1500" type="card">
           <el-carousel-item v-for="item in bannerList" :key="item.id">
             <img
               :src="item.imgUrl"
@@ -115,7 +115,13 @@ const updateBannerTitle = (row: IRow) => {
         <el-table-column prop="id" label="ID" width="180" />
         <el-table-column prop="imgUrl" label="图片预览">
           <template #default="{ row }">
-            <img :src="row.imgUrl" />
+            <el-image
+              style="width: 100px; height: 60px"
+              :src="row.imgUrl"
+              :preview-teleported="true"
+              :preview-src-list="[row.imgUrl]"
+              fit="cover"
+            />
           </template>
         </el-table-column>
         <el-table-column

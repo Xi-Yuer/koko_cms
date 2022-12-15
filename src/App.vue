@@ -3,6 +3,8 @@ import { ElConfigProvider } from 'element-plus'
 </script>
 <template>
   <el-config-provider :z-index="3000">
-    <router-view />
+    <suspense>
+      <router-view />
+    </suspense>
   </el-config-provider>
 </template>

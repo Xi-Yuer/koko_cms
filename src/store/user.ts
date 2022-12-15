@@ -4,18 +4,27 @@ import { ref } from 'vue'
 import { Login } from '@/service/api/user/index'
 import Local from '@/utils/local'
 
-export const useUserStore = defineStore('user', () => {
-  const token = ref(Local.get('TOKEN_KEY'))
+interface IUserStore {
+  token: string
+  userInfo: Function
+  userLogin: Function
+}
 
-  const userLogin = (payload: { phone: string; password: string }) => {
-    return Login(payload).then(res => {
-      token.value = res.token
-      Local.set('TOKEN_KEY', res.token)
-    })
+export const useUserStore = defineStore('user', (): IUserStore => {
+  const token = ref<any>(Local.get('TOKEN_KEY'))
+  const userInfo = ref<any>(Local.get('USER_INFO'))
+
+  const userLogin = async (payload: { phone: string; password: string }) => {
+    const res = await Login(payload)
+    token.value = res.token
+    userInfo.value = res.data
+    Local.set('TOKEN_KEY', res.token)
+    Local.set('USER_INFO', res.data)
   }
 
   return {
     token,
+    userInfo,
     userLogin,
   }
 })

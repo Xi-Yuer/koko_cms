@@ -31,7 +31,7 @@ class Request {
 
     // 响应拦截
     this.INSTANCE.interceptors.response.use(data => {
-      if (data.data.status !== 200) {
+      if (data.data.status != 200) {
         ElMessage({
           message: data.data.message,
           type: 'error',
