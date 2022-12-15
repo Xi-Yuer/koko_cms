@@ -3,11 +3,11 @@ interface IAccount {
   password: string
 }
 class Local {
-  async set(key: string, value: any) {
+  set(key: string, value: any) {
     const result = JSON.stringify(value)
     window.localStorage.setItem(key, result)
   }
-  async get(key: string): Promise<IAccount> {
+  get(key: string): IAccount {
     const value = window.localStorage.getItem(key) || ''
     const result = JSON.parse(value)
     return result

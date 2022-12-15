@@ -10,7 +10,7 @@ interface IAccount {
   password: string
 }
 
-const localAccount: Promise<IAccount> = local.get('ACCOUNT')
+const localAccount: IAccount = local.get('ACCOUNT')
 const account = reactive({
   phone: (await localAccount).phone || '',
   password: (await localAccount).password || '',

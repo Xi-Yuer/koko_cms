@@ -11,6 +11,7 @@ interface IUserStore {
 }
 
 export const useUserStore = defineStore('user', (): IUserStore => {
+  
   const token = ref<any>(Local.get('TOKEN_KEY'))
   const userInfo = ref<any>(Local.get('USER_INFO'))
 
