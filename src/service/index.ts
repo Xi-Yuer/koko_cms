@@ -79,4 +79,7 @@ class Request {
   }
 }
 
-export const request = new Request('http://localhost:80', 20000)
+export const request = new Request(
+  import.meta.env.VITE_BASE_URL,
+  import.meta.env.VITE_TIME_OUT
+)
