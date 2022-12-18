@@ -31,11 +31,19 @@ const routes: Readonly<RouteRecordRaw[]> = [
         },
       },
       {
-        path: '/product',
-        component: () => import('@/pages/product/index.vue'),
+        path: '/product/turtle',
+        component: () => import('@/pages/product/turtle/index.vue'),
         meta: {
-          path: '/product',
-          name: '商品管理',
+          path: '/product/turtle',
+          name: '甲鱼',
+        },
+      },
+      {
+        path: '/product/orange',
+        component: () => import('@/pages/product/orange/index.vue'),
+        meta: {
+          path: '/product/orange',
+          name: '砂糖橘',
         },
       },
       {

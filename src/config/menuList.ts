@@ -19,15 +19,28 @@ export const menuList: IMenu[] = [
     children: [],
   },
   {
+    path: '',
+    name: '商品',
+    icon: 'Goods',
+    children: [
+      {
+        path: '/product/turtle',
+        name: '甲鱼',
+        icon: 'Bowl',
+        children: [],
+      },
+      {
+        path: '/product/orange',
+        name: '砂糖橘',
+        icon: 'Grape',
+        children: [],
+      },
+    ],
+  },
+  {
     path: '/order',
     name: '订单管理',
     icon: 'Tickets',
-    children: [],
-  },
-  {
-    path: '/product',
-    name: '商品',
-    icon: 'Goods',
     children: [],
   },
 ]

@@ -29,7 +29,6 @@ const handleCommand = (command: ICommand) => {
       cancelButtonText: '取消',
       type: 'warning',
     }).then(() => {
-      local.clear()
       router.push('/login')
     })
   } else {

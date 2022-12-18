@@ -13,6 +13,7 @@ const bannerList = ref()
 const uploadRef = ref<InstanceType<typeof Upload>>()
 const dialogVisible = ref(false)
 const showTitleDialog = ref(false)
+const showVideoDialog = ref(false)
 const edit = ref()
 
 interface IRow {
@@ -35,10 +36,6 @@ const initData = () => {
 const uploadHandle = async () => {
   await uploadRef.value?.submitUpload()
   dialogVisible.value = false
-  ElMessage({
-    message: '上传成功',
-    type: 'success',
-  })
   initData()
 }
 
@@ -58,6 +55,11 @@ const updateTitleHandle = () => {
     initData()
     showTitleDialog.value = false
   })
+}
+
+const viewClickHandle = (row: IRow) => {
+  edit.value = row
+  showVideoDialog.value = true
 }
 
 // 打开弹窗
@@ -85,14 +87,19 @@ const updateBannerTitle = (row: IRow) => {
         </div>
       </template>
       <template v-if="bannerList?.length">
-        <el-carousel :interval="3000" type="card">
+        <el-carousel :interval="3000" type="card" pause-on-hover>
           <el-carousel-item v-for="item in bannerList" :key="item.id">
-            <img
-              :src="item.imgUrl"
-              alt=""
-              class="bg-contain"
-              :title="item.title"
-            />
+            <template v-if="'image'.indexOf(item.mimetype)">
+              <img
+                :src="item.imgUrl"
+                lazy
+                class="bg-contain"
+                :title="item.title"
+              />
+            </template>
+            <template v-if="'video'.indexOf(item.mimetype)">
+              <video :src="item.imgUrl" :autoplay="true" muted></video>
+            </template>
           </el-carousel-item>
         </el-carousel>
       </template>
@@ -113,15 +120,23 @@ const updateBannerTitle = (row: IRow) => {
       </template>
       <el-table :data="bannerList" style="width: 100%">
         <el-table-column prop="id" label="ID" width="180" />
-        <el-table-column prop="imgUrl" label="图片预览">
+        <el-table-column label="预览">
           <template #default="{ row }">
-            <el-image
-              style="width: 100px; height: 60px"
-              :src="row.imgUrl"
-              :preview-teleported="true"
-              :preview-src-list="[row.imgUrl]"
-              fit="cover"
-            />
+            <template v-if="'image/jpeg'.indexOf(row.mimetype) != -1">
+              <el-image
+                :src="row.imgUrl"
+                :preview-src-list="[row.imgUrl]"
+                class="bg-contain"
+                :title="row.title"
+                fit="cover"
+                hide-on-click-modal
+                lazy
+                preview-teleported
+              />
+            </template>
+            <template v-if="'video/x-matroska'.indexOf(row.mimetype) != -1">
+              <video :src="row.imgUrl" @click="viewClickHandle(row)"></video>
+            </template>
           </template>
         </el-table-column>
         <el-table-column
@@ -131,7 +146,11 @@ const updateBannerTitle = (row: IRow) => {
           class="overflow-ellipsis whitespace-nowrap"
         />
         <el-table-column prop="mimetype" label="类型" />
-        <el-table-column prop="size" label="文件大小(Byte)" />
+        <el-table-column label="文件大小(M)">
+          <template #default="{ row }">
+            {{ (row.size / (1024 * 1024)).toFixed(2) }}M
+          </template>
+        </el-table-column>
         <el-table-column prop="title" label="图片标题" />
         <el-table-column label="操作" align="center">
           <template #default="{ row }">
@@ -158,6 +177,7 @@ const updateBannerTitle = (row: IRow) => {
     </el-card>
     <!-- 弹窗 -->
 
+    <!-- 新建 -->
     <el-dialog
       v-model="dialogVisible"
       title="新建"
@@ -176,6 +196,7 @@ const updateBannerTitle = (row: IRow) => {
       </template>
     </el-dialog>
 
+    <!-- 编辑 -->
     <el-dialog
       v-model="showTitleDialog"
       title="修改标题"
@@ -194,6 +215,18 @@ const updateBannerTitle = (row: IRow) => {
           </el-button>
         </span>
       </template>
+    </el-dialog>
+
+    <!-- 视频预览 -->
+    <el-dialog
+      v-model="showVideoDialog"
+      title="视频预览"
+      width="60%"
+      destroy-on-close
+      draggable
+      :close-on-click-modal="false"
+    >
+      <video :src="edit.imgUrl" controls></video>
     </el-dialog>
   </div>
 </template>

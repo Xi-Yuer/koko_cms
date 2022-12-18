@@ -2,10 +2,10 @@ import { request } from '@/service'
 import { IUserInfo } from '@/store/user'
 import md5 from 'md5'
 
-interface IResponseData {
+export interface IResponseData {
   message: string
   status: number
-  data: any
+  data?: any
 }
 
 interface ILoginInfoType extends IResponseData {
@@ -25,5 +25,13 @@ export function Login(payload: {
 }
 
 export const getAllUser = (): Promise<IResponseData> => {
-  return request.get({ url: '/user/getAllUsers' })
+  return request.get({ url: '/user/getAllUsers', showLoading: true })
+}
+
+export const delUserById = (id: string): Promise<IResponseData> => {
+  return request.delete({
+    url: '/user/delete',
+    showLoading: true,
+    params: { id },
+  })
 }

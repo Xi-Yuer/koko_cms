@@ -8,8 +8,8 @@ import { storeToRefs } from 'pinia'
 const router = useRouter()
 const { isCollapse } = storeToRefs(useUIStore())
 
-const handleOpen = (key: string, keyPath: string[]) => {
-  router.push(key)
+const handleSelect = (index: string, indexPath: string[]) => {
+  router.push(index)
 }
 const handleClose = () => {}
 
@@ -31,8 +31,9 @@ const path = computed(() => route.path)
     <el-menu
       :default-active="path"
       :collapse="isCollapse"
-      @open="handleOpen"
+      @select="handleSelect"
       @close="handleClose"
+      :default-openeds="[path]"
       background-color="#001529"
       text-color="#a6bdc3"
       class="el-menu"
