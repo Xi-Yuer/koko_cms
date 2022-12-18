@@ -68,21 +68,21 @@ const producrtEdit = () => {
       </template>
       <!-- 表格 -->
       <el-table :data="ProductListData" border style="width: 100%">
-        <el-table-column prop="id" label="ID" width="180" fixed />
-        <el-table-column prop="product_name" label="名称" width="180" fixed />
-        <el-table-column prop="price" label="现价" width="100" fixed>
+        <el-table-column fixed prop="id" label="ID" width="180" />
+        <el-table-column fixed prop="product_name" label="名称" width="180" />
+        <el-table-column fixed prop="price" label="现价" width="100">
           <template #default="{ row }">
             <span class="text-red-500 font-bold">￥{{ row.price }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="old_price" label="原价" width="100">
+        <el-table-column fixed prop="old_price" label="原价" width="100">
           <template #default="{ row }">
             <span class="text-red-500 font-bold line-through"
               >￥{{ row.old_price }}</span
             >
           </template>
         </el-table-column>
-        <el-table-column label="预览">
+        <el-table-column label="预览" width="200" align="center">
           <template #default="{ row }">
             <el-image
               style="width: 100px; height: 100px"
@@ -95,21 +95,36 @@ const producrtEdit = () => {
             />
           </template>
         </el-table-column>
-        <el-table-column prop="description" label="描述" />
-        <el-table-column prop="product_address" label="生产地址" />
+        <el-table-column prop="description" label="描述" width="300" />
+        <el-table-column prop="publice_status" label="上架状态">
+          <template #default="{ row }">
+            <el-button
+              v-if="row.publice_status === 1"
+              primary
+              plain
+              type="success"
+              size="small"
+              >上架</el-button
+            >
+            <el-button v-else primary plain type="danger" size="small"
+              >下架</el-button
+            >
+          </template>
+        </el-table-column>
+        <el-table-column prop="product_address" label="生产地址" width="200" />
         <el-table-column prop="stock" label="库存" width="100" />
         <el-table-column prop="sale_count" label="销量" width="100" />
-        <el-table-column prop="create_time" label="创建时间">
+        <el-table-column prop="create_time" label="创建时间" width="180">
           <template #default="{ row }">
-            <span v-format>{{ row.create_time }}</span>
+            <span v-format class="text-sm">{{ row.create_time }}</span>
           </template>
         </el-table-column>
-        <el-table-column prop="update_time" label="更新时间">
+        <el-table-column prop="update_time" label="更新时间" width="180">
           <template #default="{ row }">
-            <span v-format>{{ row.update_time }}</span>
+            <span v-format class="text-sm">{{ row.update_time }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180" fixed="right">
+        <el-table-column fixed="right" label="操作" width="180">
           <template #default="{ row }">
             <el-button type="primary" plain>编辑</el-button>
             <el-button type="danger" plain>删除</el-button>
