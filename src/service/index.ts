@@ -33,9 +33,16 @@ class Request {
     this.INSTANCE.interceptors.response.use(data => {
       if (data.data.status != 200) {
         ElMessage({
-          message: data.data.message,
+          message: data?.data?.message,
           type: 'error',
         })
+      } else {
+        if(data?.data?.message !='ok'){
+          ElMessage({
+            message: data?.data?.message,
+            type: 'success',
+          })
+        }
       }
       return data.data
     })

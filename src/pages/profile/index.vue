@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store/user'
 import { storeToRefs } from 'pinia'
-import { ref } from 'vue'
 
 const { userInfo } = storeToRefs(useUserStore())
 </script>

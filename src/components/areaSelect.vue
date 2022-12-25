@@ -9,10 +9,10 @@ const value = ref([])
 const props = {
   expandTrigger: 'hover',
   value: 'label',
+  label: 'label',
 }
 
 const handleChange = (value: any) => {
-  console.log(value)
   const result = Object.values(value).join('·')
   emits('update:area', result)
 }
@@ -23,7 +23,6 @@ const handleChange = (value: any) => {
     v-model="value"
     :options="areaData"
     :props="props"
-    filterable
     placeholder="请选择生产地址"
     @change="handleChange"
   />

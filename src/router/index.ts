@@ -31,19 +31,28 @@ const routes: Readonly<RouteRecordRaw[]> = [
         },
       },
       {
-        path: '/product/turtle',
-        component: () => import('@/pages/product/turtle/index.vue'),
+        path: '/product/goods',
+        component: () => import('@/pages/product/goods/index.vue'),
         meta: {
-          path: '/product/turtle',
-          name: '甲鱼',
+          path: '/product/goods',
+          name: '商品',
         },
       },
       {
-        path: '/product/orange',
-        component: () => import('@/pages/product/orange/index.vue'),
+        path: '/picture/:id/:type',
+        name: 'Picture',
+        component: () => import('@/pages/picture/index.vue'),
         meta: {
-          path: '/product/orange',
-          name: '砂糖橘',
+          path: '/picture',
+          name: '图片',
+        },
+      },
+      {
+        path: '/menu',
+        component: () => import('@/pages/menu/index.vue'),
+        meta: {
+          path: '/menu',
+          name: '菜单',
         },
       },
       {

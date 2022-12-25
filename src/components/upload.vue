@@ -15,7 +15,9 @@ const props = withDefaults(
     url: string
     name: string
     limit?: number
-    fileResult: any
+    data?: Record<string, any>
+    fileResult?: any
+    fileListProps?: UploadUserFile[]
   }>(),
   {
     limit: 10,
@@ -23,8 +25,7 @@ const props = withDefaults(
 )
 
 const emits = defineEmits(['update:fileResult'])
-
-const fileList = ref<UploadUserFile[]>([])
+const fileList = ref<UploadUserFile[]>(props?.fileListProps || [])
 
 const dialogImageUrl = ref('')
 const dialogVisible = ref(false)
@@ -68,6 +69,7 @@ const actionURL = baseURL + props.url
     :name="props.name"
     :limit="props.limit"
     :multiple="true"
+    :data="data"
   >
     <el-icon><Plus /></el-icon>
   </el-upload>

@@ -6,6 +6,7 @@ export interface IResponseData {
   message: string
   status: number
   data?: any
+  count?: number
 }
 
 interface ILoginInfoType extends IResponseData {
