@@ -7,7 +7,7 @@ export const getProductList = (
   acs: number = 0,
   type?: number
 ): Promise<IResponseData> => {
-  return request.get({
+  return request.get<IResponseData>({
     url: '/product',
     showLoading: true,
     params: { limit, offset, acs, type },
@@ -16,15 +16,15 @@ export const getProductList = (
 
 // 新建
 export const createProduct = (data: any): Promise<IResponseData> => {
-  return request.post({ url: '/product/create', showLoading: true }, data)
+  return request.post<IResponseData>({ url: '/product/create', showLoading: true, data})
 }
 
 // 编辑
 export const editProduct = (data: any): Promise<IResponseData> => {
-  return request.post({ url: '/product/update', showLoading: true }, data)
+  return request.post<IResponseData>({ url: '/product/update', showLoading: true, data})
 }
 
 // 删除
 export const deleteProduct = (id: string): Promise<any> => {
-  return request.delete({ url: '/product/delete', params: { id } })
+  return request.delete<any>({ url: '/product/delete', params: { id } })
 }

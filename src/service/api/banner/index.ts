@@ -20,14 +20,14 @@ export const updateBanner = (
   id: string | number,
   title: string
 ): Promise<IDeleteBanner> => {
-  return request.post(
+  return request.post<IDeleteBanner>(
     {
       url: '/banners/update',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
       showLoading: true,
+      data:{ id, title }
     },
-    { id, title }
   )
 }

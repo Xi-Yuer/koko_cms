@@ -19,18 +19,17 @@ export function Login(payload: {
   phone: string
   password: string
 }): Promise<ILoginInfoType> {
-  return request.post(
-    { showLoading: true, url: '/user/login' },
-    { phone: payload.phone, password: md5(payload.password) }
+  return request.post<ILoginInfoType>(
+    { showLoading: true, url: '/user/login',data:{ phone: payload.phone, password: md5(payload.password) } },
   )
 }
 
 export const getAllUser = (): Promise<IResponseData> => {
-  return request.get({ url: '/user/getAllUsers', showLoading: true })
+  return request.get<IResponseData>({ url: '/user/getAllUsers', showLoading: true })
 }
 
 export const delUserById = (id: string): Promise<IResponseData> => {
-  return request.delete({
+  return request.delete<IResponseData>({
     url: '/user/delete',
     showLoading: true,
     params: { id },

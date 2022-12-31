@@ -47,7 +47,7 @@ class Request {
       return data.data
     })
   }
-  request(config: requestConfig) {
+  request<T>(config: requestConfig):Promise<T> {
     let loading: any
     if (config.showLoading) {
       loading = ElLoading.service({
@@ -57,7 +57,7 @@ class Request {
       })
     }
     return new Promise((resolve, reject) => {
-      this.INSTANCE.request({
+      this.INSTANCE.request<any,T>({
         ...config,
       })
         .then(res => {
@@ -75,14 +75,14 @@ class Request {
         })
     })
   }
-  get(config: requestConfig, data?: any): any {
-    return this.request({ ...config, data, method: 'GET' })
+  get<T>(config: requestConfig): any {
+    return this.request<T>({ ...config,  method: 'GET' })
   }
-  post(config: requestConfig, data?: any): any {
-    return this.request({ ...config, data, method: 'POST' })
+  post<T>(config: requestConfig,): any {
+    return this.request<T>({ ...config,  method: 'POST' })
   }
-  delete(config: requestConfig, data?: any): any {
-    return this.request({ ...config, data, method: 'DELETE' })
+  delete<T>(config: requestConfig): any {
+    return this.request<T>({ ...config, method: 'DELETE' })
   }
 }
 

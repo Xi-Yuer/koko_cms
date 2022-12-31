@@ -28,15 +28,15 @@ export interface IResponse {
 }
 
 export const getMenuList = (query: IQuery): Promise<IResponse> => {
-  return request.get({ url: '/menu/list', showLoading: true, params: query })
+  return request.get<IResponse>({ url: '/menu/list', showLoading: true, params: query })
 }
 
 export const createMenu = (data: any): Promise<any> => {
-  return request.post({ url: '/menu/create' }, data)
+  return request.post<any>({ url: '/menu/create', data})
 }
 export const editMenu = (data: any): Promise<any> => {
-  return request.post({ url: '/menu/update' }, data)
+  return request.post<any>({ url: '/menu/update', data})
 }
 export const deleteMenu = (id: string): Promise<any> => {
-  return request.delete({ url: '/menu/delete', params: { id } })
+  return request.delete<any>({ url: '/menu/delete', params: { id } })
 }

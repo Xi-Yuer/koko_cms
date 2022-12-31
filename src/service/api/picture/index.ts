@@ -17,7 +17,7 @@ export const getBannerList = (
   type: string,
   id: string | number
 ): Promise<IResponse> => {
-  return request.get({
+  return request.get<IResponse>({
     url: `${type}/banner/list`,
     params: { id },
     showLoading: true,
@@ -28,7 +28,7 @@ export const delBannerById = (
   type: string,
   id: string | number
 ): Promise<any> => {
-  return request.delete({
+  return request.delete<any>({
     url: `${type}/banner`,
     params: { id },
     showLoading: true,
