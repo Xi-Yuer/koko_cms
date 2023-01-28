@@ -64,7 +64,7 @@ const menuConfirm = async () => {
     </template>
     <el-table :data="dataList" border style="width: 100%">
       <el-table-column prop="id" label="ID" />
-      <el-table-column prop="menu_id" label="MenuID" />
+      <el-table-column prop="product_id" label="productId" />
       <el-table-column label="预览">
         <template #default="{ row }">
           <el-image
