@@ -7,6 +7,12 @@ interface IMenu {
 
 export const menuList: IMenu[] = [
   {
+    path: '/notify',
+    name: '通告栏',
+    icon: 'Bell',
+    children: [],
+  },
+  {
     path: '/banner',
     name: '轮播图',
     icon: 'Picture',
@@ -36,4 +42,10 @@ export const menuList: IMenu[] = [
     icon: 'Tickets',
     children: [],
   },
+  {
+    path:'/suggestion',
+    name:'建议反馈',
+    icon:'Edit',
+    children:[]
+  }
 ]

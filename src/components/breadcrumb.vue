@@ -25,7 +25,7 @@ const close = (tag: ITag) => {
   if (nextPath) {
     router.push(nextPath)
   } else {
-    router.push('/banner')
+    router.push('/notify')
   }
 }
 

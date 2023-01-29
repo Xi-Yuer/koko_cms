@@ -7,6 +7,14 @@ const routes: Readonly<RouteRecordRaw[]> = [
     component: () => import('@/pages/home/index.vue'),
     children: [
       {
+        path:'/notify',
+        component: () => import('@/pages/notify/index.vue'),
+        meta:{
+          path:'/notify',
+          name:'通告栏'
+        }
+      },
+      {
         path: '/banner',
         component: () => import('@/pages/banner/index.vue'),
         meta: {
@@ -64,6 +72,14 @@ const routes: Readonly<RouteRecordRaw[]> = [
         },
       },
       {
+        path: '/suggestion',
+        component: () => import('@/pages/suggestion/index.vue'),
+        meta: {
+          path: '/suggestion',
+          name: '建议反馈',
+        },
+      },
+      {
         path: '/:pathMatch(.*)*',
         component: () => import('@/pages/404/index.vue'),
         meta: {
@@ -93,7 +109,7 @@ router.beforeEach((to, from, next) => {
   const { addRoute } = useUIStore()
   addRoute(to.meta)
   if (to.path == '/') {
-    next('/banner')
+    next('/notify')
   } else {
     if (to.path !== '/login') {
       if (!token) {
