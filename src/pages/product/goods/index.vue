@@ -53,10 +53,11 @@ watch(
   () => initData()
 )
 
-let form: { [key: string]: string | string[] } = reactive({
+let form: { [key: string]: string | string[] | number } = reactive({
   product_name: '',
   price: '',
   old_price: '',
+  freight: 0,
   description: '',
   product_address: [],
   stock: '',
@@ -93,6 +94,7 @@ interface IRow {
   id: string
   product_name: string
   price: string
+  freight: number
   old_price: string
   description: string
   product_address: string[]
@@ -179,6 +181,13 @@ const goToBannerPage = (id: string) => {
             <template #default="{ row }">
               <span class="text-red-500 font-bold line-through"
                 >￥{{ row.old_price }}</span
+              >
+            </template>
+          </el-table-column>
+          <el-table-column fixed prop="old_price" label="运费" width="100">
+            <template #default="{ row }">
+              <span class="text-red-500 font-bold"
+                >￥{{ row.freight }}</span
               >
             </template>
           </el-table-column>
@@ -285,6 +294,9 @@ const goToBannerPage = (id: string) => {
         </el-form-item>
         <el-form-item label="现价￥" prop="price">
           <el-input v-model="form.price" type="number" />
+        </el-form-item>
+        <el-form-item label="运费￥" prop="price">
+          <el-input v-model="form.freight" type="number" />
         </el-form-item>
         <el-form-item label="商品描述" prop="description">
           <el-input v-model="form.description" autosize type="textarea" />

@@ -21,6 +21,13 @@ export const rules = reactive<FormRules>({
       required: false,
     },
   ],
+  freight: [
+    {
+      required: true,
+      message: '运费不能为空',
+      trigger: 'blur',
+    },
+  ],
   description: [
     {
       required: true,
