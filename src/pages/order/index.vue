@@ -121,6 +121,7 @@ watch(
                   <span class='font-bold text-red-500'>￥{{ row.product.price }}</span>
                 </template>
               </el-table-column>
+              <el-table-column prop='remark' label='订单备注'></el-table-column>
             </el-table>
           </template>
         </el-table-column>
